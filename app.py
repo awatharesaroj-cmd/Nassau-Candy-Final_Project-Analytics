@@ -220,7 +220,7 @@ elif page == "🏭 Factory Performance":
         pivot  = matrix.pivot(index='Product Name', columns='Factory', values='Sales').fillna(0)
         pivot['Total'] = pivot.sum(axis=1)
         st.dataframe(pivot.sort_values('Total',ascending=False)
-                     .style.background_gradient(cmap='Purples').format('${:,.0f}'),
+                     .style.format('${:,.0f}'),
                      use_container_width=True, height=350)
 
 # ════════════════════════════════════════════════════════════════════════════
@@ -330,9 +330,7 @@ elif page == "📦 Product Analytics":
         perf['Margin %'] = (perf['Gross_Profit']/perf['Total_Sales']*100).round(1)
         perf = perf.sort_values('Total_Sales', ascending=False)
         st.dataframe(
-            perf.style.background_gradient(subset=['Margin %'], cmap='RdYlGn')
-                      .format({'Total_Cost':'${:,.2f}','Total_Sales':'${:,.0f}',
-                               'Gross_Profit':'${:,.2f}','Margin %':'{:.1f}%'}),
+            perf.style.format({'Total_Cost':'${:,.2f}','Total_Sales':'${:,.0f}','Gross_Profit':'${:,.2f}','Margin %':'{:.1f}%'}),
             use_container_width=True, height=400)
 
 # ════════════════════════════════════════════════════════════════════════════
