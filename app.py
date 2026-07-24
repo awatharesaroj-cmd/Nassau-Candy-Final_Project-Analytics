@@ -15,6 +15,8 @@ st.set_page_config(
 st.markdown("""
 <style>
     .stApp { background: linear-gradient(135deg, #1a0533 0%, #2d1054 100%); }
+
+    /* ── Metric Cards ── */
     .metric-card {
         background: linear-gradient(135deg, #6B21A8, #7C3AED);
         padding: 20px; border-radius: 15px; text-align: center;
@@ -22,6 +24,8 @@ st.markdown("""
     }
     .metric-value { font-size: 2rem; font-weight: bold; color: #FFD700; }
     .metric-label { font-size: 0.9rem; color: #E9D5FF; margin-top: 5px; }
+
+    /* ── Page Title ── */
     .page-title {
         text-align: center; color: #FF69B4; font-size: 2.5rem;
         font-weight: bold; padding: 10px;
@@ -32,7 +36,77 @@ st.markdown("""
         color: #FF69B4; font-size: 1.3rem; font-weight: bold;
         border-bottom: 2px solid #6B21A8; padding-bottom: 5px; margin: 20px 0 10px 0;
     }
-    div[data-testid="stSidebar"] { background: linear-gradient(180deg, #1a0533 0%, #2d1054 100%); }
+
+    /* ── Sidebar Background ── */
+    div[data-testid="stSidebar"] {
+        background: linear-gradient(180deg, #0f0220 0%, #1a0533 50%, #2d1054 100%) !important;
+        border-right: 2px solid #6B21A8;
+    }
+
+    /* ── Sidebar Title ── */
+    div[data-testid="stSidebar"] h1,
+    div[data-testid="stSidebar"] h2,
+    div[data-testid="stSidebar"] h3 {
+        color: #FF69B4 !important;
+        font-weight: bold !important;
+        font-size: 1.2rem !important;
+        text-shadow: 0 0 10px rgba(255,105,180,0.5);
+    }
+
+    /* ── Sidebar Text & Labels ── */
+    div[data-testid="stSidebar"] p,
+    div[data-testid="stSidebar"] span,
+    div[data-testid="stSidebar"] label,
+    div[data-testid="stSidebar"] .stMarkdown {
+        color: #E9D5FF !important;
+        font-size: 0.95rem !important;
+        font-weight: 500 !important;
+    }
+
+    /* ── Sidebar Radio Buttons ── */
+    div[data-testid="stSidebar"] .stRadio label {
+        color: #F0ABFC !important;
+        font-size: 0.95rem !important;
+        font-weight: 600 !important;
+        padding: 4px 0 !important;
+    }
+    div[data-testid="stSidebar"] .stRadio label:hover {
+        color: #FF69B4 !important;
+    }
+
+    /* ── Sidebar Multiselect ── */
+    div[data-testid="stSidebar"] .stMultiSelect label {
+        color: #C084FC !important;
+        font-size: 0.9rem !important;
+        font-weight: 600 !important;
+        letter-spacing: 0.5px !important;
+        text-transform: uppercase !important;
+    }
+    div[data-testid="stSidebar"] .stMultiSelect [data-baseweb="tag"] {
+        background-color: #6B21A8 !important;
+        color: #FFD700 !important;
+        font-weight: bold !important;
+    }
+
+    /* ── Sidebar Metrics ── */
+    div[data-testid="stSidebar"] [data-testid="stMetricValue"] {
+        color: #FFD700 !important;
+        font-weight: bold !important;
+    }
+
+    /* ── Sidebar Divider ── */
+    div[data-testid="stSidebar"] hr {
+        border-color: #6B21A8 !important;
+        margin: 10px 0 !important;
+    }
+
+    /* ── Filter section headers ── */
+    div[data-testid="stSidebar"] .stMarkdown strong {
+        color: #FFD700 !important;
+        font-size: 1rem !important;
+    }
+
+    /* ── Main content ── */
     .stSelectbox label, .stSlider label, .stMultiSelect label { color: #E9D5FF !important; }
     h1, h2, h3 { color: #FF69B4 !important; }
     p, li { color: #E9D5FF !important; }
