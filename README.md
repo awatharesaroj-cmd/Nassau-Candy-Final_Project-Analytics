@@ -1,4 +1,4 @@
-# Nassau-Candy-Final_Project-Analytics
+# Nassau-Candy-Distribution_Analytics
 # 🍬 Nassau Candy Distributor
 ## Factory Reallocation & Shipping Optimization Analytics
 
