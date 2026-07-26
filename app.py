@@ -241,7 +241,20 @@ if page == "🏠 Executive Summary":
                                  name='Total Sales', line=dict(color='#7C3AED', width=3), mode='lines+markers'))
         fig.add_trace(go.Scatter(x=monthly['Month Name'], y=monthly['Profit'],
                                  name='Total Profit', line=dict(color='#EC4899', width=3), mode='lines+markers'))
-        fig.update_xaxes(categoryorder='array', categoryarray=MONTH_ORDER)
+        fig.update_xaxes(
+            categoryorder='array', categoryarray=MONTH_ORDER,
+            title_text='Month', title_font=dict(color='#F0ABFC', size=13),
+            tickfont=dict(color='#E9D5FF', size=11)
+        )
+        fig.update_yaxes(
+            title_text='Amount ($)', title_font=dict(color='#F0ABFC', size=13),
+            tickfont=dict(color='#E9D5FF', size=11),
+            tickprefix='$'
+        )
+        fig.update_layout(legend=dict(
+            font=dict(color='#E9D5FF'), bgcolor='rgba(0,0,0,0.3)',
+            bordercolor='#7C3AED', borderwidth=1
+        ))
         st.plotly_chart(chart_layout(fig), use_container_width=True)
 
     with col2:
@@ -258,6 +271,10 @@ if page == "🏠 Executive Summary":
                   color='Ship Mode', color_discrete_sequence=COLORS, template='plotly_dark', text='Orders')
     fig3.update_traces(textposition='outside')
     fig3.update_layout(showlegend=False)
+    fig3.update_xaxes(title_text='Number of Orders',
+        title_font=dict(color='#F0ABFC',size=13), tickfont=dict(color='#E9D5FF',size=11))
+    fig3.update_yaxes(title_text='Ship Mode',
+        title_font=dict(color='#F0ABFC',size=13), tickfont=dict(color='#E9D5FF',size=11))
     st.plotly_chart(chart_layout(fig3, 300), use_container_width=True)
 
 # ════════════════════════════════════════════════════════════════════════════
@@ -295,6 +312,10 @@ elif page == "🏭 Factory Performance":
                        template='plotly_dark', text='Total_Sales')
         fig_s.update_traces(texttemplate='$%{text:,.0f}', textposition='outside')
         fig_s.update_layout(showlegend=False)
+        fig_s.update_xaxes(title_text='Total Sales ($)',
+            title_font=dict(color='#F0ABFC',size=13), tickfont=dict(color='#E9D5FF',size=11))
+        fig_s.update_yaxes(title_text='Factory',
+            title_font=dict(color='#F0ABFC',size=13), tickfont=dict(color='#E9D5FF',size=11))
         st.plotly_chart(chart_layout(fig_s, 350), use_container_width=True)
 
     col3, col4 = st.columns(2)
@@ -305,6 +326,10 @@ elif page == "🏭 Factory Performance":
                         template='plotly_dark', text='Avg_LT')
         fig_lt.update_traces(texttemplate='%{text:.1f} days', textposition='outside')
         fig_lt.update_layout(showlegend=False)
+        fig_lt.update_xaxes(title_text='Avg Lead Time (Days)',
+            title_font=dict(color='#F0ABFC',size=13), tickfont=dict(color='#E9D5FF',size=11))
+        fig_lt.update_yaxes(title_text='Factory',
+            title_font=dict(color='#F0ABFC',size=13), tickfont=dict(color='#E9D5FF',size=11))
         st.plotly_chart(chart_layout(fig_lt), use_container_width=True)
 
     with col4:
@@ -355,7 +380,14 @@ elif page == "🚚 Shipping Analysis":
     st.markdown('<p class="section-header">🗺️ Regional Shipping Performance by Ship Mode</p>', unsafe_allow_html=True)
     reg_sm = dff.groupby(['Region','Ship Mode'])['Lead Time (Days)'].mean().reset_index()
     fig3 = px.bar(reg_sm, x='Region', y='Lead Time (Days)', color='Ship Mode',
-                  barmode='group', color_discrete_sequence=COLORS, template='plotly_dark')
+                  barmode='group', color_discrete_sequence=COLORS, template='plotly_dark',
+                  labels={'Lead Time (Days)':'Avg Lead Time (Days)','Region':'Region'})
+    fig3.update_xaxes(title_text='Region',
+        title_font=dict(color='#F0ABFC',size=13), tickfont=dict(color='#E9D5FF',size=11))
+    fig3.update_yaxes(title_text='Avg Lead Time (Days)',
+        title_font=dict(color='#F0ABFC',size=13), tickfont=dict(color='#E9D5FF',size=11))
+    fig3.update_layout(legend=dict(font=dict(color='#E9D5FF'),
+        bgcolor='rgba(0,0,0,0.3)',bordercolor='#7C3AED',borderwidth=1))
     st.plotly_chart(chart_layout(fig3, 350), use_container_width=True)
 
     st.markdown('<p class="section-header">📊 Total Sales by Region and Ship Mode</p>', unsafe_allow_html=True)
@@ -363,6 +395,12 @@ elif page == "🚚 Shipping Analysis":
     fig4 = px.bar(reg_sales, x='Sales', y='Region', color='Ship Mode',
                   orientation='h', barmode='stack',
                   color_discrete_sequence=COLORS, template='plotly_dark')
+    fig4.update_xaxes(title_text='Total Sales ($)',
+        title_font=dict(color='#F0ABFC',size=13), tickfont=dict(color='#E9D5FF',size=11))
+    fig4.update_yaxes(title_text='Region',
+        title_font=dict(color='#F0ABFC',size=13), tickfont=dict(color='#E9D5FF',size=11))
+    fig4.update_layout(legend=dict(font=dict(color='#E9D5FF'),
+        bgcolor='rgba(0,0,0,0.3)',bordercolor='#7C3AED',borderwidth=1))
     st.plotly_chart(chart_layout(fig4, 350), use_container_width=True)
 
 # ════════════════════════════════════════════════════════════════════════════
@@ -392,6 +430,10 @@ elif page == "📦 Product Analytics":
                      template='plotly_dark', text='Sales')
         fig.update_traces(texttemplate='$%{text:,.0f}', textposition='outside')
         fig.update_layout(yaxis=dict(categoryorder='total ascending'), showlegend=False)
+        fig.update_xaxes(title_text='Total Sales ($)',
+            title_font=dict(color='#F0ABFC',size=13), tickfont=dict(color='#E9D5FF',size=11))
+        fig.update_yaxes(title_text='Product Name',
+            title_font=dict(color='#F0ABFC',size=13), tickfont=dict(color='#E9D5FF',size=11))
         st.plotly_chart(chart_layout(fig), use_container_width=True)
 
     with col2:
@@ -413,6 +455,10 @@ elif page == "📦 Product Analytics":
                       color_continuous_scale='RdYlGn', template='plotly_dark', text='Margin %')
         fig3.update_traces(texttemplate='%{text:.1f}%', textposition='outside')
         fig3.update_layout(showlegend=False)
+        fig3.update_xaxes(title_text='Profit Margin (%)',
+            title_font=dict(color='#F0ABFC',size=13), tickfont=dict(color='#E9D5FF',size=11))
+        fig3.update_yaxes(title_text='Product Name',
+            title_font=dict(color='#F0ABFC',size=13), tickfont=dict(color='#E9D5FF',size=11))
         st.plotly_chart(chart_layout(fig3), use_container_width=True)
 
     with col4:
@@ -466,9 +512,25 @@ elif page == "🎯 What-If Analysis":
                              orientation='h', marker_color='#7C3AED'))
         fig.add_trace(go.Bar(name='Simulated', x=flt['Simulated'], y=flt['Factory'],
                              orientation='h', marker_color='#EC4899'))
-        fig.update_layout(barmode='group', template='plotly_dark',
-                          paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0.2)',
-                          font_color='white')
+        fig.update_layout(
+            barmode='group', template='plotly_dark',
+            paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0.2)',
+            font_color='white',
+            legend=dict(
+                title='Lead Time', font=dict(color='#E9D5FF'),
+                bgcolor='rgba(0,0,0,0.3)', bordercolor='#7C3AED', borderwidth=1
+            )
+        )
+        fig.update_xaxes(
+            title_text='Lead Time (Days)',
+            title_font=dict(color='#F0ABFC', size=13),
+            tickfont=dict(color='#E9D5FF', size=11)
+        )
+        fig.update_yaxes(
+            title_text='Factory',
+            title_font=dict(color='#F0ABFC', size=13),
+            tickfont=dict(color='#E9D5FF', size=11)
+        )
         st.plotly_chart(fig, use_container_width=True)
 
     with col2:
@@ -481,6 +543,11 @@ elif page == "🎯 What-If Analysis":
                        annotation_text='Current Profit')
         fig2.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0.2)',
                            font_color='white')
+        fig2.update_xaxes(title_text='Lead Time Reduction (%)',
+            title_font=dict(color='#F0ABFC',size=13), tickfont=dict(color='#E9D5FF',size=11))
+        fig2.update_yaxes(title_text='Simulated Profit ($)',
+            title_font=dict(color='#F0ABFC',size=13), tickfont=dict(color='#E9D5FF',size=11),
+            tickprefix='$')
         st.plotly_chart(fig2, use_container_width=True)
 
     st.markdown('<p class="section-header">📋 Recommendation Table</p>', unsafe_allow_html=True)
